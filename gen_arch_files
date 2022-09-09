@@ -1,0 +1,15 @@
+#!/bin/bash
+
+export ROOT_FOLDER=root.x86_64
+export ARCH_TAR_FILE=archlinux-bootstrap.tar.gz
+
+curl https://geo.mirror.pkgbuild.com/iso/2022.09.03/archlinux-bootstrap-x86_64.tar.gz --output $ARCH_TAR_FILE
+
+tar xvf $ARCH_TAR_FILE
+
+cp install_deps $ROOT_FOLDER
+cp /etc/resolv.conf $ROOT_FOLDER/etc
+
+cp /proc/mounts $ROOT_FOLDER/etc/mtab
+
+chroot $ROOT_FOLDER /bin/bash -c './install_deps'
